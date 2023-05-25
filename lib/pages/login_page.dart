@@ -12,7 +12,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: [
+        children: const [
           Fondo(),
           Contenido(),
         ],
@@ -26,7 +26,13 @@ class Fondo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.blue.shade100, Colors.blue],
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft)),
+    );
   }
 }
 
@@ -82,7 +88,7 @@ class _DatosState extends State<Datos> {
     return Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.amber[300]),
+          borderRadius: BorderRadius.circular(10), color: Colors.white),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -132,9 +138,9 @@ class _DatosState extends State<Datos> {
                   },
                 )),
           ),
-          //Remember(),
+          Remember(),
           //SizedBox(),
-          //Botones(),
+          const Botones(),
         ],
       ),
     );
@@ -149,9 +155,23 @@ class Remember extends StatefulWidget {
 }
 
 class _RememberState extends State<Remember> {
+  bool valor = false;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Row(
+      children: [
+        Checkbox(
+            value: valor,
+            onChanged: (value) {
+              setState(() {
+                valor == false ? valor = true : valor = false;
+              });
+            }),
+        const Text('Remember me'),
+        const Spacer(),
+        TextButton(onPressed: () {}, child: const Text('Forgot password?'))
+      ],
+    );
   }
 }
 
@@ -160,6 +180,62 @@ class Botones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [
+        const SizedBox(
+          width: double.infinity,
+          height: 25,
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color(0xff142047))),
+              child: const Text(
+                'Login',
+                style: TextStyle(color: Colors.white),
+              )),
+        ),
+        const SizedBox(
+          width: double.infinity,
+          height: 25,
+        ),
+        const Text(
+          'Or sign with',
+          style: TextStyle(color: Colors.grey),
+        ),
+        const SizedBox(
+          width: double.infinity,
+          height: 25,
+        ),
+        SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: OutlinedButton(
+              onPressed: () {},
+              child: const Text(
+                'Sign with Google',
+                style: TextStyle(color: Color(0xff142047), fontSize: 18),
+              ),
+            )), //Google
+        const SizedBox(
+          width: double.infinity,
+          height: 25,
+        ),
+        SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: OutlinedButton(
+              onPressed: () {},
+              child: const Text(
+                'Sign with Facebook',
+                style: TextStyle(color: Color(0xff142047), fontSize: 18),
+              ),
+            )), //Facbeook
+      ],
+    );
   }
 }
